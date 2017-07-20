@@ -4,6 +4,7 @@
 //= require _vendor/lodash
 //= require _analytics
 //= require _start-modules
+//= require lunr.min
 
 $(function() {
   $('.fixedsticky').fixedsticky();

@@ -39,6 +39,15 @@ end
 activate :autoprefixer
 activate :sprockets
 activate :syntax
+activate :search do |search|
+  search.resources = ['index.html','standards/','manuals/']
+  search.fields = {
+    title:   {boost: 100, store: true, required: true},
+    content: {boost: 50},
+    url:     {index: false, store: true},
+    author:  {boost: 30}
+  }
+end
 
 ###
 # Helpers
