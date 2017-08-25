@@ -1,0 +1,69 @@
+---
+title: GDS Node.js Style Guide
+---
+
+# <%= current_page.data.title %>
+
+## General style
+
+As with all Javascript at GDS, for Node.js applications we use the [standard] style.
+
+## Use strict mode
+
+[Strict mode] should be enabled for Node.js modules, as in the browser this prevents polluting the global scope.
+Note, in Node.js this would pollute the `global` object, rather than the `window` object.
+
+## ES2015+, let and const
+
+For Node.js code, we prefer using `const` and `let` for our immutable and mutable variable declarations, rather than using `var`.
+
+One of the best parts of coding Node is that you can use most of the latest JavaScript features, a useful guide for what ES2015+ features are supported in each version of Node.js can be found at [Node Green].
+ES2015+ often (but not always) makes for smaller, more easily readable and maintainable code, though judgement should be exercised as to when this is the case.
+
+## Organise your imports
+
+Import your dependencies at the top of each file, and group them into 'core', 'npm' and 'local' dependencies, like in the below example.
+This makes your imports clearer and allows others to  more easily understand and maintain cross dependencies of each file.
+
+```
+'use strict'
+
+// Core Dependencies
+const crypto = require('crypto')
+const fs = require('fs')
+const path = require('path')
+
+// NPM Dependencies
+const express = require('express')
+const lodash = require('lodash')
+const request = require('request')
+
+// Local Dependencies
+const config = require('../../config')
+const controller = require('./controller')
+const utilFunction = require('../../utils/util_function.js')
+```
+
+## Promises
+
+For Node.js applications, we use the native `Promise` implementation available in Node.js over alternatives like `q` or `bluebird`.
+This allows for a consistent Promise implementation between projects.
+
+Promise rejections should, as a general rule, reject with an instance of `Error` or one of it's subclasses. More on [Node.js Errors].
+
+## Closures and Function Hoisting
+
+When building high volume applications in Node, it is important to be conscious of (and kind to) the V8 Engine's garbage collector.
+One area to be aware of, in order to maximise performance, is avoiding unnecessary function declarations within another function's scope.
+These unnecessary declarations result in the V8 engine needing to declare these functions on every invocation of the function.
+
+If a separate function is required, for example to encapsulate a specific complex task or because to allow multiple calls to it,
+then it should wherever possible be declared outside the calling function's scope, either in a separate module if it is likely to be depended on by multiple modules,
+or at the bottom of the module where it is called, taking advantage of [function hoisting] to make the code clearer.
+
+
+[standard]: https://standardjs.com/
+[Node Green]: http://node.green/
+[Strict mode]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
+[Node.js Errors]: https://nodejs.org/api/errors.html
+[function hoisting]: https://developer.mozilla.org/en-US/docs/Glossary/Hoisting
