@@ -38,6 +38,23 @@ Either Gradle or Maven should be used as the build tool.
 
 Different programmes have differing requirements about where dependencies should be sourced from.
 
+##Database Connectivity
+
+Dropwizard ships with [JDBI](http://jdbi.org/) and this is used in some capactiy by all of the Java programmes within GDS.
+
 ## Web frameworks
 
 We use [Dropwizard](http://www.dropwizard.io/) as our web framework of choice, using our own [logging extension](https://github.com/alphagov/dropwizard-logstash/)
+Dropwizard provides a selection of well known, widely used open source components tied together in a framework. By standardising on the same framwork across teams we get the following benefits:
+* All Java apps are deployed and configured in the same way, reducing operational burden
+* People can easily move from working on one project to another
+* We can learn from each others experiences.
+
+## References
+
+The online book [Java for small teams](https://ncrcoe.gitbooks.io/java-for-small-teams/content/) provides consise description of some of the conventions we follow.
+
+Further background on these conventions can be found in the following books:
+* [Clean-Code] (https://www.goodreads.com/book/show/3735293-clean-code)
+* [Effective Java] (https://www.goodreads.com/book/show/105099.Effective_Java_Programming_Language_Guide?from_search=true)
+* [Refactoring] (https://www.goodreads.com/book/show/44936.Refactoring?from_search=true)
