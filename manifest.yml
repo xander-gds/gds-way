@@ -1,10 +1,10 @@
 ---
 applications:
-- name: gds-way
+- name: gds-way-test
   memory: 64M
   path: ./build
   buildpack: staticfile_buildpack
-- name: gds-tech-docs
+- name: gds-tech-docs-test
   memory: 64M
   path: ./redirect
   buildpack: staticfile_buildpack
